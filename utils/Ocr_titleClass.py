@@ -17,7 +17,7 @@ def read_file(path):
 # 匹配是否有如下关键词
 def find_key(text):
     num = 0
-    pattern = re.compile(u'上诉|起诉|诉')
+    pattern = re.compile(u'宣判笔录|笔录')
     # print(pattern)
     # PATTERN = re.compile(ur'上诉')
     res = re.findall(pattern, text)
@@ -31,7 +31,7 @@ def find_key(text):
     return num
 
 if __name__ == '__main__':
-    path_in = "F:\Test\out\\tQSZ"
+    path_in = "F:\Test\out\\tXPBL"
     # 获取路径下的所有文件
     text_list = os.listdir(path_in)
     num = 0
