@@ -30,7 +30,7 @@ def find_key(text):
     #         break
     return num
 
-if __name__ == '__main__':
+def test_folder():
     path_in = "F:\Test\out\\tXPBL"
     # 获取路径下的所有文件
     text_list = os.listdir(path_in)
@@ -48,4 +48,19 @@ if __name__ == '__main__':
             text2 = read_file(path_long)
             num += find_key(text2)
     print("num", num)
-    print(num/file_num)
+    print(num / file_num)
+
+
+def test_folder2():
+    path_in = "F:\Test\out"
+    path_out = "F:\Test\pre_out"
+    num = 0
+    folder_list = os.listdir(path_in)
+    for folder in folder_list:
+        file_list = os.listdir(os.path.join(path_in,folder))
+        for file in file_list:
+            num += 1
+            print(file)
+    print("num", num)
+if __name__ == '__main__':
+    test_folder2()
