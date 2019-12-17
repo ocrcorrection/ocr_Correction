@@ -134,12 +134,28 @@ def match_sighan(text):
     # print(word_dic)
     return sen_list, word_dic
 
+# 匹配sighan新版，train版
+def match_sighan2(text):
+    word_dic = {}
+    # m = re.match(u'<ESSAY title')
+    reg = re.compile('<ESSAY title')
+    # print(re.findall(u"<ESSAY title=\"(.+?)\">", text))
+    sen_list = []
+    for i in range(len(text)):
+        if text[i].startswith("<TEXT>"):
+            sen_list.append(text[i][6:-7])
+        elif text[i].startswith("<WRONG>") and text[i + 1].startswith("<CORRECTION>"):
+            word_dic[text[i][7:-8]] = text[i + 1][12:-13]
+    # print(sen_list)
+    # print(word_dic)
+    return sen_list, word_dic
+
 def union_format_dir(dir_path="/Users/stone/Documents/correction_data/sighan bake-off/train",
                      out_path = "/Users/stone/Documents/correction_data/sighan bake-off processed/sighan_output_train.txt"):
     # Todo
     traditional_text_list = os.listdir(dir_path)
     sim_list = []
-    # print(traditional_text_list)
+    print(traditional_text_list)
     sen_count = 0 # 统计句子个数
     for text in tqdm(traditional_text_list):
         traditional_text = read_file(os.path.join(dir_path, text))
@@ -149,12 +165,12 @@ def union_format_dir(dir_path="/Users/stone/Documents/correction_data/sighan bak
             simplified_sentence = Traditional2Simplified(c)
             sim_list.append(simplified_sentence.strip())
             sen_count += 1
-    # print(sim_list)
+    print(sim_list)
     print("count:", sen_count)
     # s:source; d:target
-    s, d = match_sighan(sim_list)
-    # print(s)
-    # print(d)
+    s, d = match_sighan2(sim_list)
+    print(s)
+    print(d)
     write_to_txt2(out_path, match_str(s, d))
 
 if __name__=="__main__":
@@ -166,8 +182,9 @@ if __name__=="__main__":
     test_out = "/Users/stone/Documents/correction_data/sighan bake-off processed/sighan_output_test.txt"
     train_out = "/Users/stone/Documents/correction_data/sighan bake-off processed/sighan_output_train.txt"
     # union_format_dir(dir_path=test_path, out_path=test_out)
-    union_format_dir()
-    # union_format_dir(dir_path="/Users/stone/Documents/correction_data/sighan_test", out_path="/Users/stone/Documents/correction_data/test.txt")
+    union_format_dir(dir_path=train_path, out_path=train_out)
+    # union_format_dir(dir_path="/Users/stone/Documents/correction_data/sighan_test",
+    #                  out_path="/Users/stone/Documents/correction_data/test2.txt")
     # dir_path = "/Users/stone/Documents/correction_data/sighan_test/test13.sgml"
     # read_file(dir_path)
     # path = "/Users/stone/Documents/correction_data/sighan bake-off"
