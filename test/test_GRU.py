@@ -59,20 +59,17 @@ def model():
     out_size = int(target.get_shape()[1])
     weight, bias = initialize_weight_bias(in_size=num_hidden, out_size=out_size)
     logits = tf.add(tf.matmul(last_output, weight), bias)
-
-
     return logits
 
-
-def train():
-    classes = 100
-    # 训练测试
-    # input_X:指输入的image
-    input_X = tf.placeholder(tf.float32, shape=(None, 64, 64))
-    input_Y = tf.placeholder(tf.float32, shape=(None, classes))
-
-    dropout = tf.placeholder(tf.float32)
-    input_logits =
+# def train():
+#     classes = 100
+#     # 训练测试
+#     # input_X:指输入的image
+#     input_X = tf.placeholder(tf.float32, shape=(None, 64, 64))
+#     input_Y = tf.placeholder(tf.float32, shape=(None, classes))
+#
+#     dropout = tf.placeholder(tf.float32)
+#     input_logits =
 
 if __name__ == '__main__':
     print("+=========================")
