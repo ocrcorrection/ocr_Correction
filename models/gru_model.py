@@ -61,4 +61,4 @@ class Model:
         last_output = tf.gather(outputs, int(outputs.get_shape()[0]-1))
 
         # linear transform
-        out_size = int(target.)
+        # out_size = int()
